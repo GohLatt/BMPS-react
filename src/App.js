@@ -1,4 +1,5 @@
 import React from "react";
+import { Fragment, useState } from "react";
 const CATEGORIES = [
   { name: "technology", color: "#3b82f6" },
   { name: "science", color: "#16a34a" },
@@ -45,17 +46,13 @@ const initialFacts = [
 ];
 
 function App() {
-  const appTitle = "React Project";
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <>
-      <header className="header">
-        <div className="logo">
-          <img src="./logo.png" alt="logo" />
-          <h1>{appTitle}</h1>
-        </div>
-        <button className="btn btn-large btn-open">Share A face</button>
-      </header>
-      <FactForm />
+      <Header showForm={showForm} setShowForm={setShowForm} />
+
+      {showForm ? <FactForm /> : null}
       <main className="main">
         <CategoryFilter />
         <FactList />
@@ -100,6 +97,23 @@ const CategoryFilter = () => {
         ))}
       </ul>
     </aside>
+  );
+};
+const Header = ({ showForm, setShowForm }) => {
+  const appTitle = "React Project";
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="./logo.png" alt="logo" />
+        <h1>{appTitle}</h1>
+      </div>
+      <button
+        className="btn btn-large btn-open"
+        onClick={() => setShowForm((show) => !show)}
+      >
+        {showForm ? "close" : "share a fact"}
+      </button>
+    </header>
   );
 };
 
