@@ -62,7 +62,51 @@ function App() {
 }
 
 const FactForm = () => {
-  return <form className="fact-form ">Fact Form</form>;
+  const [text, setText] = useState("");
+  const [source, setSource] = useState("");
+  const [category, setCategory] = useState("");
+  const textLength = text.length;
+
+  const handle = (e) => {
+    e.preventDefault();
+    if(text && source && category && textLength <= 200) 
+    
+    
+    
+  };
+
+  return (
+    <form className="fact-form " onSubmit={handle}>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Share A Fact With The Words...."
+      />
+      <span>{200 - textLength}</span>
+      <input
+        type="text"
+        value={source}
+        onChange={(e) => setSource(e.target.value)}
+        placeholder="Trustworthy Source...."
+      />
+      <select
+        name=""
+        id=""
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="">Chose catagory:</option>
+
+        {CATEGORIES.map((cat) => (
+          <option key={cat.name} value={cat.name}>
+            {cat.name.toUpperCase()}
+          </option>
+        ))}
+      </select>
+      <button className="btn btn-large ">Post</button>
+    </form>
+  );
 };
 
 const FactList = () => {
